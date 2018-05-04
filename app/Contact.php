@@ -112,7 +112,7 @@ class Contact extends Model
         									->get();
         }else if(Auth::user()->roleId == User::ADMIN){
 
-            $result = DB::table($this->table)->select('link')
+            $result = DB::table($this->table)->select('link',DB::raw('count(*) as count_data'))
             								->where('register_time','>=',$startDate)
         									->where('register_time','<=',$endDate)
         									->where('register_time','>=',Auth::user()->dateJoin)
@@ -120,7 +120,7 @@ class Contact extends Model
         									->get();
         }else{
         	$link = explode(',',Auth::user()->duan);
-            $result = DB::table($this->table)->select('link')
+            $result = DB::table($this->table)->select('link',DB::raw('count(*) as count_data'))
             								->where('register_time','>=',$startDate)
         									->where('register_time','<=',$endDate)
         									->where('register_time','>=',Auth::user()->dateJoin)
